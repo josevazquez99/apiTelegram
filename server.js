@@ -42,12 +42,12 @@ const initDB = async () => {
 // -------------------- RUTAS --------------------
 
 // Health check
-app.get("/api/health", (req, res) => {
+app.get("https://apitelegram-16k1.onrender.com/api/health", (req, res) => {
   res.json({ status: "OK", timestamp: new Date().toISOString() });
 });
 
 // Guardar conversación
-app.post("/api/conversations", async (req, res) => {
+app.post("https://apitelegram-16k1.onrender.com/api/conversations", async (req, res) => {
   const { platform, user_id, user_message, ai_response, metadata } = req.body;
 
   if (!platform || !user_message || !ai_response) {
@@ -81,7 +81,7 @@ app.post("/api/conversations", async (req, res) => {
 });
 
 // Obtener todas con paginación y filtros
-app.get("/api/conversations", async (req, res) => {
+app.get("https://apitelegram-16k1.onrender.com/api/conversations", async (req, res) => {
   const { page = 1, limit = 50, platform, user_id } = req.query;
   const offset = (page - 1) * limit;
 
@@ -129,7 +129,7 @@ app.get("/api/conversations", async (req, res) => {
 });
 
 // Obtener una conversación
-app.get("/api/conversations/:id", async (req, res) => {
+app.get("https://apitelegram-16k1.onrender.com/api/conversations/:id", async (req, res) => {
   try {
     const row = await db.get("SELECT * FROM conversations WHERE id = ?", [
       req.params.id,
@@ -145,7 +145,7 @@ app.get("/api/conversations/:id", async (req, res) => {
 });
 
 // Eliminar conversación
-app.delete("/api/conversations/:id", async (req, res) => {
+app.delete("https://apitelegram-16k1.onrender.com/api/conversations/:id", async (req, res) => {
   try {
     const result = await db.run(
       "DELETE FROM conversations WHERE id = ?",
@@ -162,7 +162,7 @@ app.delete("/api/conversations/:id", async (req, res) => {
 });
 
 // Estadísticas
-app.get("/api/stats", async (req, res) => {
+app.get("https://apitelegram-16k1.onrender.com/api/stats", async (req, res) => {
   try {
     const total = await db.get("SELECT COUNT(*) as total FROM conversations");
 
